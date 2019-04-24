@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.entity.usr.customer.Customer" table="usr_customer">
+        <id name="id" type="java.lang.Integer" column="id">
+            <!--native本地策略，根据底层数据库选择identity|sequence-->
+            <!--identity自动增长策略，采用MySQL数据库的自动增长机制，不适用oracle-->
+            <!--assigned是hibernate不维护主键，手动设置主键-->
+            <generator class="native"></generator>
+        </id>
+        <!--复合主键，实体类须实现序列化接口-->
+        <!--<composite-id>-->
+            <!--<key-property name="firstName" type="string" column="firstName"></key-property>-->
+            <!--<key-property name="lastName" type="string" column="lastName"></key-property>-->
+        <!--</composite-id>-->
+        <property name="name" type="java.lang.String" column="name"></property>
+        <property name="age" type="java.lang.Integer" column="age"></property>
+        <property name="gmtCreate" type="java.util.Date" column="gmtCreate"></property>
+        <property name="gmtModified" type="java.util.Date" column="gmtModified"></property>
+    </class>
+    <query name="findAll">
+        from Customer
+    </query>
+    <sql-query name="sql_findAll">
+        select * from usr_customer
+    </sql-query>
+</hibernate-mapping>
