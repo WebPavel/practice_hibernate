@@ -1,4 +1,4 @@
-package zv2.com.cn.dao;
+package zv2.com.cn.dao.usr.customer;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;

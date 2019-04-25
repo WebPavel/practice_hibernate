@@ -104,6 +104,7 @@ fabric.properties
 .idea/modules.xml
 .idea/practice_hibernate.iml
 .idea/vcs.xml
+.idea/
 #pom.xml
 #practice1_hibernate/pom.xml
 practice1_hibernate/practice1_hibernate.iml
