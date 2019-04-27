@@ -25,5 +25,6 @@
 
         <mapping resource="zv2/com/cn/entity/usr/customer/Customer.hbm.xml"></mapping>
         <mapping resource="zv2/com/cn/entity/biz/album/Album.hbm.xml"></mapping>
+        <mapping resource="zv2/com/cn/entity/biz/order/Order.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

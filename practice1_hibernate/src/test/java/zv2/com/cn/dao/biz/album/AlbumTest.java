@@ -20,6 +20,40 @@ public class AlbumTest {
      * 依赖于hibernate的一级缓存
      */
 
+    /**
+     * select-before-update="true"
+     * 更新前检查是否改变，即在更新之前先查询
+     */
+    @Test
+    public void updateAfterCheck() {
+        Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        Album album = new Album();
+        album.setId(2);
+        album.setName("light music");
+        album.setAuthor("high");
+        album.setPrice(new BigDecimal(250));
+        session.update(album);
+        transaction.commit();
+        session.close();
+    }
+
+    /**
+     * update当根据id找不到记录时，须设置id的unsaved-value=指定值
+     */
+    @Test
+    public void save() {
+        Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        Album album = new Album();
+        album.setId(-1);
+        album.setName("light music");
+        album.setAuthor("high");
+        album.setPrice(new BigDecimal(250));
+        session.saveOrUpdate(album);
+        transaction.commit();
+        session.close();
+    }
 
     public void update(Integer id, Album album) {
         Session session = HibernateUtils.openSession();

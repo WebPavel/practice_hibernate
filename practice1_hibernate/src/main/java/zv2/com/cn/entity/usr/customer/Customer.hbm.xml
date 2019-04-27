@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="zv2.com.cn.entity.usr.customer.Customer" table="usr_customer">
-        <id name="id" type="java.lang.Integer" column="id">
+        <id name="id" column="id" type="java.lang.Integer">
             <!--native本地策略，根据底层数据库选择identity|sequence-->
             <!--identity自动增长策略，采用MySQL数据库的自动增长机制，不适用oracle-->
             <!--assigned是hibernate不维护主键，手动设置主键-->
@@ -17,8 +17,21 @@
         <!--</composite-id>-->
         <property name="name" type="java.lang.String" column="name"></property>
         <property name="age" type="java.lang.Integer" column="age"></property>
+        <property name="password" type="java.lang.String" column="password"></property>
+        <property name="email" type="java.lang.String" column="email"></property>
+        <property name="telephone" type="java.lang.String" column="telephone"></property>
+        <property name="avatar" type="java.lang.String" column="avatar"></property>
+        <property name="gender" type="java.lang.Integer" column="gender"></property>
+        <property name="birthday" type="java.util.Date" column="birthday"></property>
+        <property name="profile" type="java.lang.String" column="profile"></property>
         <property name="gmtCreate" type="java.util.Date" column="gmtCreate"></property>
         <property name="gmtModified" type="java.util.Date" column="gmtModified"></property>
+        <!--<set name="orders" cascade="save-update,delete,delete-orphan">-->
+        <!--inverse为true表示放弃维护外键关系-->
+        <set name="orders" cascade="save-update,delete,delete-orphan" inverse="true">
+            <key column="customerId"></key>
+            <one-to-many class="zv2.com.cn.entity.biz.order.Order"/>
+        </set>
     </class>
     <query name="findAll">
         from Customer
