@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.entity.usr.student.Student" table="usr_student">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="className"/>
+        <property name="gender"/>
+        <property name="nation"/>
+        <property name="birthday"/>
+        <property name="political"/>
+        <property name="idCard"/>
+        <set name="courses" table="biz_student_course" cascade="save-update,delete">
+            <key column="studentId"></key>
+            <many-to-many class="zv2.com.cn.entity.biz.course.Course" column="courseId"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
