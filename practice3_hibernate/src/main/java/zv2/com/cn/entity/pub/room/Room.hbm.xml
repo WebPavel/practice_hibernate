@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.entity.pub.room.Room" table="pub_room">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+        <property name="owner"/>
+        <property name="address"/>
+        <property name="rank"/>
+        <set name="visitors" cascade="save-update">
+            <key column="roomId"></key>
+            <one-to-many class="zv2.com.cn.entity.usr.visitor.Visitor"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
