@@ -13,6 +13,10 @@ import zv2.com.cn.utils.HibernateUtils;
  */
 public class CustomerOrderTest {
 
+    /**
+     * inverse默认是false，表示不放弃外键维护
+     * 注意区分cascade、inverse
+     */
     @Test
     public void testInverse() {
         Session session = HibernateUtils.openSession();
@@ -25,7 +29,8 @@ public class CustomerOrderTest {
         order.setName("tony的订单2019042800");
         order.setAddress("sz");
         customer.getOrders().add(order);
-        // 保存了客户和订单，这是由cascade控制的.order的外键为null，是由inverse控制的
+        // 客户是否保存到数据库了?订单是否保存到数据库了?都保存到数据库了，这是由cascade控制的.但是order的外键为null，是由inverse控制的
+//        order.setCustomer(customer); // 将外键维护交给order
         session.save(customer);
         transaction.commit();
         session.close();

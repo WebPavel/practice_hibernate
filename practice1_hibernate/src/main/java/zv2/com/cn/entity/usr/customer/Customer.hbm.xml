@@ -5,6 +5,7 @@
 <hibernate-mapping>
     <class name="zv2.com.cn.entity.usr.customer.Customer" table="usr_customer">
         <id name="id" column="id" type="java.lang.Integer">
+            <!--uuid由hibernate生成唯一主键，不用查询数据库就可以获取-->
             <!--native本地策略，根据底层数据库选择identity|sequence-->
             <!--identity自动增长策略，采用MySQL数据库的自动增长机制，不适用oracle-->
             <!--assigned是hibernate不维护主键，手动设置主键-->

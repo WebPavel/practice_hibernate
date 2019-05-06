@@ -21,7 +21,8 @@ public class StudentCourseTest {
         Transaction transaction = session.beginTransaction();
         Student student = (Student) session.get(Student.class, 1);
         Course course = (Course) session.get(Course.class, 2);
-        student.getCourses().remove(course);
+        // 1号学生撤销选课2
+        student.getCourses().remove(course); // 持久态
         transaction.commit();
         session.close();
     }
@@ -62,10 +63,12 @@ public class StudentCourseTest {
         course1.setName("Python");
         student.getCourses().add(course);
         student.getCourses().add(course1);
+        // 课程关联学生
         course.getStudents().add(student);
         course1.getStudents().add(student);
         student1.getCourses().add(course);
         course.getStudents().add(student1);
+        // 保存,此时必须有一方放弃维护外键(一般被动方放弃)否则报batchUpdateException
         session.save(student);
         session.save(student1);
         session.save(course);

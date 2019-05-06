@@ -15,7 +15,7 @@
         <property name="teacherName"/>
         <!--name对应实体类中集合名称，table是中间表的名称-->
         <set name="students" table="biz_student_course" inverse="true">
-            <!--当前类在中间表中的关联外键-->
+            <!--当前类在中间表中的关联外键名称-->
             <key column="courseId"></key>
             <!--column:另一方在中间表中的外键名称-->
             <many-to-many class="zv2.com.cn.entity.usr.student.Student" column="studentId"></many-to-many>
