@@ -1,7 +1,5 @@
 package zv2.com.cn.test;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
@@ -11,7 +9,6 @@ import zv2.com.cn.entity.pub.room.Room;
 import zv2.com.cn.entity.usr.visitor.Visitor;
 import zv2.com.cn.utils.HibernateUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,18 +16,25 @@ import java.util.List;
  * @date 2019/4/29 0:49
  */
 public class RoomVisitorTest {
+    /**
+     * 条件查询
+     */
     @Test
     public void testCondition() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-        List<Room> rooms = session.createCriteria(Room.class).add(Restrictions.like("name", "%的房间")).list();
-//        List<Room> rooms = session.createQuery("from Room where name like ?").setParameter(0, "%的房间").list();
+//        List<Room> rooms = session.createQuery("from Room where name like ?").setParameter(0, "%提莫%").list();
+        List<Room> rooms = session.createCriteria(Room.class).add(Restrictions.like("name", "%提莫%")).list();
         for (Room room : rooms) {
             System.out.println("5-"+room.getName()+","+room.getOwner()+","+room.getAddress());
         }
         transaction.commit();
         session.close();
     }
+
+    /**
+     * 绑定参数是实体的情况
+     */
     @Test
     public void testRelated() {
         Session session = HibernateUtils.openSession();
@@ -44,8 +48,12 @@ public class RoomVisitorTest {
         transaction.commit();
         session.close();
     }
+
+    /**
+     * 投影查询
+     */
     @Test
-    public void testSelectParam() {
+    public void testSelectField() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
 //        List<Object[]> attrs = session.createQuery("select r.name,r.address from Room r").list();
@@ -59,13 +67,17 @@ public class RoomVisitorTest {
         transaction.commit();
         session.close();
     }
+
+    /**
+     * 参数绑定
+     */
     @Test
     public void testParameter() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-//        List<Room> rooms = session.createQuery(" from Room where owner = ?").setString(0, "周二珂").list();
-//        List<Room> rooms = session.createQuery(" from Room where owner = ? and rank = ?").setString(0, "周二珂").setInteger(1, 2).list();
-        List<Room> rooms = session.createQuery(" from Room where owner = :owner and rank = :rank").setString("owner", "周二珂").setInteger("rank", 2).list();
+//        List<Room> rooms = session.createQuery("from Room where owner = ?").setString(0, "周二珂").list();
+//        List<Room> rooms = session.createQuery("from Room where owner = ? and rank = ?").setString(0, "周二珂").setInteger(1, 2).list();
+        List<Room> rooms = session.createQuery("from Room where owner = :owner and rank = :rank").setString("owner", "周二珂").setInteger("rank", 2).list();
         for (Room room : rooms) {
             System.out.println(room.getName()+","+room.getOwner()+","+room.getAddress());
         }
@@ -73,6 +85,9 @@ public class RoomVisitorTest {
         session.close();
     }
 
+    /**
+     * 单条记录
+     */
     @Test
     public void testUniqueResult() {
         Session session = HibernateUtils.openSession();
@@ -83,26 +98,31 @@ public class RoomVisitorTest {
         transaction.commit();
         session.close();
     }
+
+    /**
+     * 分页查询
+     */
     @Test
     public void testLimit() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-//        Query query = session.createQuery("from Visitor");
-//        query.setFirstResult(10);
-//        query.setMaxResults(10);
-//        List<Visitor> visitors = query.list();
-        List<Visitor> visitors = session.createCriteria(Visitor.class).setFirstResult(0).setMaxResults(10).list();
+//        List<Visitor> visitors = session.createQuery("from Visitor").setFirstResult(0).setMaxResults(10).list();
+        List<Visitor> visitors = session.createCriteria(Visitor.class).setFirstResult(10).setMaxResults(10).list();
         for (Visitor visitor : visitors) {
             System.out.println(visitor.getName()+","+visitor.getVipRank()+","+visitor.getRoom());
         }
         transaction.commit();
         session.close();
     }
+
+    /**
+     * 按列排序
+     */
     @Test
     public void testOrderBy() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-//        List<Room> rooms = session.createQuery(" from Room r order by r.rank desc ").list();
+//        List<Room> rooms = session.createQuery("from Room r order by r.rank desc ").list();
         List<Room> rooms = session.createCriteria(Room.class).addOrder(Order.asc("rank")).list();
         for (Room room : rooms) {
             System.out.println(room.getName()+","+room.getOwner()+","+room.getAddress());
@@ -117,7 +137,7 @@ public class RoomVisitorTest {
     public void testPolymorphismQuery() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-        List<Object> objects = session.createQuery(" from java.lang.Object").list();
+        List<Object> objects = session.createQuery("from java.lang.Object").list();
         System.out.println(objects);
         transaction.commit();
         session.close();
@@ -126,7 +146,7 @@ public class RoomVisitorTest {
     public void testQuery() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-//        List<Room> rooms = session.createQuery(" from Room").list();
+//        List<Room> rooms = session.createQuery("from Room").list();
 //        List<Room> rooms = session.createCriteria(Room.class).list();
 //        for (Room room : rooms) {
 //            System.out.println(room.getName()+","+room.getOwner()+","+room.getAddress());
@@ -176,7 +196,7 @@ public class RoomVisitorTest {
 //        for (int i = 0; i < 10; i++) {
 //            Visitor visitor = new Visitor();
 //            visitor.setName(room.getName()+"机器人"+i+"号");
-//            visitor.setVipRank(3);
+//            visitor.setVipRank(2);
 //            visitor.setRoom(room);
 //            room.getVisitors().add(visitor);
 //        }
@@ -190,7 +210,7 @@ public class RoomVisitorTest {
 //        for (int i = 0; i < 10; i++) {
 //            Visitor visitor = new Visitor();
 //            visitor.setName(room.getName()+"机器人"+i+"号");
-//            visitor.setVipRank(3);
+//            visitor.setVipRank(1);
 //            visitor.setRoom(room);
 //            room.getVisitors().add(visitor);
 //        }

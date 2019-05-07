@@ -17,6 +17,8 @@ public class Room {
     private String address;
     private Integer rank;
 
+    private Set<Visitor> visitors = new HashSet<Visitor>();
+
     public Room() {
     }
 
@@ -25,8 +27,6 @@ public class Room {
         this.owner = owner;
         this.address = address;
     }
-
-    private Set<Visitor> visitors = new HashSet<Visitor>();
 
     public Integer getId() {
         return id;

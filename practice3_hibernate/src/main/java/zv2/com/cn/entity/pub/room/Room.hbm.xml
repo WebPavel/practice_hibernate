@@ -16,4 +16,8 @@
             <one-to-many class="zv2.com.cn.entity.usr.visitor.Visitor"></one-to-many>
         </set>
     </class>
+    <!--命名查询-->
+    <query name="findAll">
+        from Room
+    </query>
 </hibernate-mapping>
