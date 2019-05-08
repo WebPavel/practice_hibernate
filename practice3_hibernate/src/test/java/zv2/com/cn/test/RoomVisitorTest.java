@@ -43,7 +43,7 @@ public class RoomVisitorTest {
         room.setId(1);
         List<Visitor> visitors = session.createQuery("from Visitor v where v.room = ?").setEntity(0, room).list();
         for (Visitor visitor: visitors) {
-            System.out.println("4-"+visitor.getName()+","+visitor.getVipRank()+","+visitor.getRoom());
+            System.out.println("4-"+visitor.getName()+","+visitor.getVipLevel()+","+visitor.getRoom());
         }
         transaction.commit();
         session.close();
@@ -109,7 +109,7 @@ public class RoomVisitorTest {
 //        List<Visitor> visitors = session.createQuery("from Visitor").setFirstResult(0).setMaxResults(10).list();
         List<Visitor> visitors = session.createCriteria(Visitor.class).setFirstResult(10).setMaxResults(10).list();
         for (Visitor visitor : visitors) {
-            System.out.println(visitor.getName()+","+visitor.getVipRank()+","+visitor.getRoom());
+            System.out.println(visitor.getName()+","+visitor.getVipLevel()+","+visitor.getRoom());
         }
         transaction.commit();
         session.close();
@@ -173,48 +173,48 @@ public class RoomVisitorTest {
     public void testAdd() {
         Session session = HibernateUtils.openSession();
         Transaction transaction = session.beginTransaction();
-//        Room room = new Room();
-//        room.setName("冯提莫的房间");
-//        room.setOwner("冯提莫");
-//        room.setAddress("https://www.douyu.com/520520");
-//        room.setRank(1);
-//        // 添加机器人
-//        for (int i = 0; i < 10; i++) {
-//            Visitor visitor = new Visitor();
-//            visitor.setName(room.getName()+"机器人"+i+"号");
-//            visitor.setVipRank(3);
-//            visitor.setRoom(room);
-//            room.getVisitors().add(visitor);
-//        }
-//        session.save(room);
-//        Room room = new Room();
-//        room.setName("周二珂的房间");
-//        room.setOwner("周二珂");
-//        room.setAddress("https://www.douyu.com/5201314");
-//        room.setRank(2);
-//        // 添加机器人
-//        for (int i = 0; i < 10; i++) {
-//            Visitor visitor = new Visitor();
-//            visitor.setName(room.getName()+"机器人"+i+"号");
-//            visitor.setVipRank(2);
-//            visitor.setRoom(room);
-//            room.getVisitors().add(visitor);
-//        }
-//        session.save(room);
-//        Room room = new Room();
-//        room.setName("大司马的房间");
-//        room.setOwner("大司马");
-//        room.setAddress("https://www.douyu.com/168168");
-//        room.setRank(2);
-//        // 添加机器人
-//        for (int i = 0; i < 10; i++) {
-//            Visitor visitor = new Visitor();
-//            visitor.setName(room.getName()+"机器人"+i+"号");
-//            visitor.setVipRank(1);
-//            visitor.setRoom(room);
-//            room.getVisitors().add(visitor);
-//        }
-//        session.save(room);
+        Room room = new Room();
+        room.setName("冯提莫的房间");
+        room.setOwner("冯提莫");
+        room.setAddress("https://www.douyu.com/520520");
+        room.setRank(1);
+        // 添加机器人
+        for (int i = 0; i < 10; i++) {
+            Visitor visitor = new Visitor();
+            visitor.setName(room.getName()+"机器人"+i+"号");
+            visitor.setVipLevel(3);
+            visitor.setRoom(room);
+            room.getVisitors().add(visitor);
+        }
+        session.save(room);
+        Room room2 = new Room();
+        room2.setName("周二珂的房间");
+        room2.setOwner("周二珂");
+        room2.setAddress("https://www.douyu.com/5201314");
+        room2.setRank(2);
+        // 添加机器人
+        for (int i = 0; i < 10; i++) {
+            Visitor visitor = new Visitor();
+            visitor.setName(room2.getName()+"机器人"+i+"号");
+            visitor.setVipLevel(2);
+            visitor.setRoom(room2);
+            room2.getVisitors().add(visitor);
+        }
+        session.save(room2);
+        Room room3 = new Room();
+        room3.setName("大司马的房间");
+        room3.setOwner("大司马");
+        room3.setAddress("https://www.douyu.com/168168");
+        room3.setRank(2);
+        // 添加机器人
+        for (int i = 0; i < 10; i++) {
+            Visitor visitor = new Visitor();
+            visitor.setName(room3.getName()+"机器人"+i+"号");
+            visitor.setVipLevel(1);
+            visitor.setRoom(room3);
+            room3.getVisitors().add(visitor);
+        }
+        session.save(room3);
         transaction.commit();
         session.close();
     }

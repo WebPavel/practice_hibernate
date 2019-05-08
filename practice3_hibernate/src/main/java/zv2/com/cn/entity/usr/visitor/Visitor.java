@@ -13,7 +13,7 @@ public class Visitor {
     private Integer id;
     private String name;
     private String ip;
-    private Integer vipRank;
+    private Integer vipLevel;
     private Date gmtCreate;
     private Date gmtModified;
     private Room room;
@@ -42,12 +42,12 @@ public class Visitor {
         this.ip = ip;
     }
 
-    public Integer getVipRank() {
-        return vipRank;
+    public Integer getVipLevel() {
+        return vipLevel;
     }
 
-    public void setVipRank(Integer vipRank) {
-        this.vipRank = vipRank;
+    public void setVipLevel(Integer vipLevel) {
+        this.vipLevel = vipLevel;
     }
 
     public Date getGmtCreate() {

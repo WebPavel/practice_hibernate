@@ -15,6 +15,9 @@ public class HibernateUtils {
         configuration = new Configuration().configure();
         sessionFactory = configuration.buildSessionFactory();
     }
+    public static Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
     public static Session openSession() {
         return sessionFactory.openSession();
     }

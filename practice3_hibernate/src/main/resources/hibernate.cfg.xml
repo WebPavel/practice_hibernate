@@ -22,6 +22,10 @@
         <property name="c3p0.max_size">20</property>
         <property name="c3p0.timeout">120</property>
         <property name="c3p0.idle_test_period">3000</property>
+        <!--MySQL默认4，避免脏读、不可重复读-->
+        <property name="hibernate.connection.isolation">4</property>
+        <!--开启当前线程中的session-->
+        <property name="current_session_context_class">thread</property>
 
         <mapping resource="zv2/com/cn/entity/pub/room/Room.hbm.xml"></mapping>
         <mapping resource="zv2/com/cn/entity/usr/visitor/Visitor.hbm.xml"></mapping>

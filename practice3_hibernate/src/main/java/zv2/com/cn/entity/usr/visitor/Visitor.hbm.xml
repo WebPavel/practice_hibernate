@@ -9,9 +9,11 @@
         </id>
         <property name="name"/>
         <property name="ip"/>
-        <property name="vipRank"/>
+        <property name="vipLevel"/>
         <property name="gmtCreate"/>
         <property name="gmtModified"/>
-        <many-to-one name="room" class="zv2.com.cn.entity.pub.room.Room" column="roomId"/>
+        <!--fetch="join"发送迫切左外连接SQL，lazy属性被忽略-->
+        <!--lazy="proxy"表示关联的对象是否进行立即检索由关联对象映射文件<class>上lazy属性决定-->
+        <many-to-one name="room" class="zv2.com.cn.entity.pub.room.Room" column="roomId" fetch="select" lazy="proxy"/>
     </class>
 </hibernate-mapping>

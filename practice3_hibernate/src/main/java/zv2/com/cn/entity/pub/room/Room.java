@@ -19,6 +19,8 @@ public class Room {
 
     private Set<Visitor> visitors = new HashSet<Visitor>();
 
+    private Integer version;
+
     public Room() {
     }
 
@@ -74,5 +76,13 @@ public class Room {
 
     public void setVisitors(Set<Visitor> visitors) {
         this.visitors = visitors;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
