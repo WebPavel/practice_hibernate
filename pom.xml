@@ -12,6 +12,7 @@
     <module>practice1_hibernate</module>
       <module>practice2_hibernate</module>
       <module>practice3_hibernate</module>
+      <module>practice4_hibernate</module>
   </modules>
 
   <name>practice_hibernate</name>

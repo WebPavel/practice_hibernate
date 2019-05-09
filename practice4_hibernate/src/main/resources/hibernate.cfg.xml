@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_practice1?useUnicode=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456</property>
+        <property name="hibernate.connection.autocommit">false</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <!--update没有表时创建表并更新表结构、表记录数据-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
+        <!--<property name="hibernate.hbm2ddl.auto">validate</property>-->
+
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="c3p0.min_size">5</property>
+        <property name="c3p0.max_size">20</property>
+        <property name="c3p0.timeout">120</property>
+        <property name="c3p0.idle_test_period">3000</property>
+        <!--MySQL默认4，避免脏读、不可重复读-->
+        <property name="hibernate.connection.isolation">4</property>
+        <!--开启当前线程中的session-->
+        <property name="current_session_context_class">thread</property>
+        <!--开启二级缓存-->
+        <property name="cache.use_second_level_cache">true</property>
+        <!--配置二级缓存的提供商-->
+        <!--EhCache不支持transaction这种并发访问策略，所以并发访问策略选择read-write,此时事务隔离级别是read commit，能避免脏读-->
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+        <!--开启查询缓存-->
+        <property name="hibernate.cache.use_query_cache">true</property>
+
+        <mapping resource="zv2/com/cn/entity/pub/radio/Radio.hbm.xml"></mapping>
+        <mapping resource="zv2/com/cn/entity/biz/host/Host.hbm.xml"></mapping>
+        <!--二级缓存缓存哪些类，同时设置并发访问策略-->
+        <class-cache class="zv2.com.cn.entity.biz.host.Host" usage="read-write"/>
+        <class-cache class="zv2.com.cn.entity.pub.radio.Radio" usage="read-write"/>
+        <!--二级缓存缓存哪些集合，同时设置并发访问策略-->
+        <collection-cache collection="zv2.com.cn.entity.biz.host.Host.radios" usage="read-write"/>
+    </session-factory>
+</hibernate-configuration>

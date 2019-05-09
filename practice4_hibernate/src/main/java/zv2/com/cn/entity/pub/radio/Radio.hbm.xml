@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.entity.pub.radio.Radio" table="pub_radio" lazy="true">
+        <id name="id" type="string" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="name"/>
+        <property name="title"/>
+        <property name="tag"/>
+        <property name="hz"/>
+        <property name="owner"/>
+        <property name="address"/>
+        <many-to-one name="host" class="zv2.com.cn.entity.biz.host.Host" column="hostId"/>
+    </class>
+</hibernate-mapping>
