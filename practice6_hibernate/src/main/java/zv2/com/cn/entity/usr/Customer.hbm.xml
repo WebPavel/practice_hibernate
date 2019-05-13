@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="zv2.com.cn.entity.usr.Customer" table="usr_customer">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="username" column="username"/>
+        <property name="nickname"/>
+        <property name="gender"/>
+        <property name="age"/>
+        <property name="avatar"/>
+        <property name="address"/>
+        <property name="profile"/>
+        <set name="orders" cascade="delete">
+            <key column="customerId"></key>
+            <one-to-many class="zv2.com.cn.entity.biz.Order"/>
+        </set>
+    </class>
+</hibernate-mapping>

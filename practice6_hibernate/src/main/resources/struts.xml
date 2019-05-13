@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.ui.theme" value="simple" />
+    <package name="usr-customer" extends="struts-default" namespace="/usr/customer">
+        <action name="customer_*" class="zv2.com.cn.action.usr.CustomerAction" method="{1}">
+            <result name="findAllSuccess">/jsp/usr/customer/customer_list.jsp</result>
+            <result name="deleteSuccess" type="redirectAction">customer_findAll</result>
+        </action>
+    </package>
+    <package name="biz-order" extends="struts-default" namespace="/biz/order">
+        <action name="order_*" class="zv2.com.cn.action.biz.OrderAction" method="{1}">
+        </action>
+    </package>
+</struts>
